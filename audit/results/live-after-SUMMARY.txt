@@ -1,0 +1,11 @@
+home       mobile  P  90 A 100 BP 100 SEO 100 | FCP 1.7 LCP 3.4 TBT 54 CLS 0.001 SI 3.0 TTFB 176ms | perf runs [89, 90, 98]
+home       desktop P 100 A 100 BP 100 SEO 100 | FCP 0.5 LCP 0.5 TBT 0 CLS 0.000 SI 0.9 TTFB 174ms | perf runs [100, 100, 100]
+the-house  mobile  P  99 A 100 BP 100 SEO 100 | FCP 1.3 LCP 2.0 TBT 0 CLS 0.000 SI 2.6 TTFB 121ms | perf runs [98, 99, 99]
+the-house  desktop P 100 A 100 BP 100 SEO 100 | FCP 0.4 LCP 0.6 TBT 0 CLS 0.000 SI 0.6 TTFB 164ms | perf runs [100, 100, 100]
+gallery    mobile  P  97 A 100 BP 100 SEO 100 | FCP 1.4 LCP 2.4 TBT 0 CLS 0.000 SI 2.7 TTFB 166ms | perf runs [97, 97, 97]
+gallery    desktop P 100 A 100 BP 100 SEO 100 | FCP 0.4 LCP 0.8 TBT 0 CLS 0.000 SI 0.6 TTFB 162ms | perf runs [100, 100, 100]
+rates      mobile  P  98 A 100 BP 100 SEO 100 | FCP 1.3 LCP 2.1 TBT 0 CLS 0.000 SI 2.8 TTFB 162ms | perf runs [98, 98, 98]
+rates      desktop P 100 A 100 BP 100 SEO 100 | FCP 0.5 LCP 0.6 TBT 0 CLS 0.000 SI 0.6 TTFB 130ms | perf runs [100, 100, 100]
+contact    mobile  P  97 A 100 BP 100 SEO 100 | FCP 1.5 LCP 2.3 TBT 0 CLS 0.000 SI 2.8 TTFB 125ms | perf runs [97, 97, 97]
+contact    desktop P 100 A 100 BP 100 SEO 100 | FCP 0.4 LCP 0.7 TBT 0 CLS 0.014 SI 0.6 TTFB 166ms | perf runs [100, 100, 100]
+(median of run1-3; minfonts-run* = home only, box Chrome limited to Liberation/DejaVu fonts; PSI API: 429 daily quota)

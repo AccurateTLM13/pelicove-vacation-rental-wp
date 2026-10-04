@@ -1,0 +1,36 @@
+--- /tmp/v3.css.orig	2026-10-03 22:46:20.647239936 -0500
++++ wordpress/wp-content/themes/sample-beach-house/assets/css/v3.css	2026-10-03 22:46:20.659239923 -0500
+@@ -302,7 +302,7 @@
+ .amp-truth p { margin: 0; font-size: .93rem; line-height: 1.55; color: #33444B; }
+ .amp-truth .amp-ico { background: #FFF1CC; color: #8A5A00; }
+ /* Get around */
+-.amp-ga { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 2rem; margin: 1.6rem 0 0 !important; padding: 0; list-style: none; }
++.amp-ga { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 2rem; margin: 1.6rem auto 0 !important; padding: 0; list-style: none; }
+ .amp-ga--c3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+ .amp-ga li { display: grid; grid-template-columns: auto 1fr auto; grid-template-areas: "i n t" "i s s"; column-gap: .9rem; align-items: center; padding: .85rem 0; margin: 0; border-bottom: 1px solid var(--amp-line); }
+ .amp-ga .amp-ico { grid-area: i; width: 40px; height: 40px; border-radius: 12px; background: #fff; }
+@@ -310,9 +310,9 @@
+ .amp-ga-time { grid-area: t; font-variant-numeric: tabular-nums; white-space: nowrap; font-size: .92rem; color: var(--amp-navy); }
+ .amp-ga-src { grid-area: s; font-size: .74rem; color: var(--amp-muted); }
+ /* Trust */
+-.amp-trust { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1.2rem; margin: 1.8rem 0 0 !important; padding: 0; list-style: none; }
++.amp-trust { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1.2rem; margin: 1.8rem auto 0 !important; padding: 0; list-style: none; }
+ .amp-trust li { display: flex; gap: .9rem; align-items: flex-start; margin: 0; }
+-.amp-trust strong { display: block; font: 400 1.3rem/1.15 var(--amp-serif); margin-bottom: .25rem; }
++.amp-trust li > div > strong { display: block; font: 400 1.3rem/1.15 var(--amp-serif); margin-bottom: .25rem; }
+ .amp-trust span:not(.amp-ico) { display: block; font-size: .9rem; line-height: 1.5; color: #3A4A51; }
+ /* FAQ */
+ .amp-faq { margin-top: 1.4rem; border-top: 1px solid var(--amp-line); }
+@@ -586,3 +586,12 @@
+ .amp-credits li { break-inside: avoid; margin: 0 0 .45rem; }
+ .amp-area-note { font-size: .85rem; opacity: .85; }
+ .sbh-footer-muted a[href^="mailto:"] { white-space: nowrap; font-size: .86em; }
++
++/* v4.0.1 pre-footer alignment fix.
++   - .amp-trust / .amp-ga used "margin: X 0 0 !important", which beat the constrained layout's
++     "margin-inline: auto !important", so above ~1336px they hugged the left padding instead of centering.
++     (Fixed in place above with "auto".)
++   - CTA cover band: use the same root/global side padding as every other section (core cover default is 1em),
++     and center its eyebrow like the headline below it. */
++.wp-block-cover.sbh-cta { padding-left: var(--wp--style--root--padding-left); padding-right: var(--wp--style--root--padding-right); }
++.sbh-cta .sbh-eyebrow { text-align: center; }

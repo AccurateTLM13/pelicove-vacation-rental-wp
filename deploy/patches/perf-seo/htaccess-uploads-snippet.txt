@@ -1,0 +1,21 @@
+# BEGIN Pelicove WebP
+# The directives (lines) between "BEGIN Pelicove WebP" and "END Pelicove WebP" are
+# dynamically generated, and should only be modified via WordPress filters.
+# Any changes to the directives between these markers will be overwritten.
+# Serve the pre-generated "<image>.jpg.webp" copy to browsers that accept WebP (same URL, smaller file)
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTP_ACCEPT} image/webp
+  RewriteCond %{REQUEST_FILENAME} -f
+  RewriteCond %{REQUEST_FILENAME}.webp -f
+  RewriteRule ^(.+)\.(jpe?g|png)$ $1.$2.webp [NC,T=image/webp,L]
+</IfModule>
+<IfModule mod_headers.c>
+  <FilesMatch "(?i)\.(jpe?g|png)(\.webp)?$">
+    Header append Vary Accept
+  </FilesMatch>
+</IfModule>
+<IfModule mod_mime.c>
+  AddType image/webp .webp
+</IfModule>
+# END Pelicove WebP

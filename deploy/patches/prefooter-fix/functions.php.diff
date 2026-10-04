@@ -1,0 +1,34 @@
+--- /tmp/functions.php.orig	2026-10-03 22:46:20.647239936 -0500
++++ wordpress/wp-content/themes/sample-beach-house/functions.php	2026-10-03 22:46:20.659239923 -0500
+@@ -1,6 +1,12 @@
+ <?php
++// Asset cache-buster: theme Version (style.css) + file mtime, so a version bump always refreshes caches
++// even if an upload tool preserves the old modification time.
++function sbh_asset_ver( $rel ) {
++	$f = get_stylesheet_directory() . '/' . $rel;
++	return wp_get_theme()->get( 'Version' ) . '.' . ( file_exists( $f ) ? filemtime( $f ) : '0' );
++}
+ add_action( 'wp_enqueue_scripts', function () {
+-	wp_enqueue_style( 'sbh-site', get_stylesheet_directory_uri() . '/assets/css/site.css', array(), filemtime( get_stylesheet_directory() . '/assets/css/site.css' ) );
++	wp_enqueue_style( 'sbh-site', get_stylesheet_directory_uri() . '/assets/css/site.css', array(), sbh_asset_ver( 'assets/css/site.css' ) );
+ } );
+ add_action( 'after_setup_theme', function () {
+ 	add_editor_style( 'assets/css/site.css' );
+@@ -24,7 +30,7 @@
+ 		wp_enqueue_script( 'leaflet', $uri . '/assets/vendor/leaflet/leaflet.js', array(), '1.9.4', array( 'in_footer' => true, 'strategy' => 'defer' ) );
+ 		$deps[] = 'leaflet';
+ 	}
+-	wp_enqueue_script( 'sbh-site', $uri . '/assets/js/site.js', $deps, filemtime( $dir . '/assets/js/site.js' ), array( 'in_footer' => true, 'strategy' => 'defer' ) );
++	wp_enqueue_script( 'sbh-site', $uri . '/assets/js/site.js', $deps, sbh_asset_ver( 'assets/js/site.js' ), array( 'in_footer' => true, 'strategy' => 'defer' ) );
+ } );
+ // Preconnect to the live-data APIs on the front page (hero poster preload is in the v3 block)
+ add_action( 'wp_head', function () {
+@@ -48,7 +54,7 @@
+ 
+ add_action( 'wp_enqueue_scripts', function () {
+ 	$dir = get_stylesheet_directory(); $uri = get_stylesheet_directory_uri();
+-	$v = function ( $f ) use ( $dir ) { return filemtime( "$dir/$f" ); };
++	$v = 'sbh_asset_ver';
+ 	wp_enqueue_script( 'lenis', "$uri/assets/vendor/lenis/lenis.min.js", array(), '1.3.26', array( 'in_footer' => true, 'strategy' => 'defer' ) );
+ 	wp_enqueue_script( 'amp-booking', "$uri/assets/js/booking.js", array(), $v( 'assets/js/booking.js' ), array( 'in_footer' => true, 'strategy' => 'defer' ) );
+ 	if ( function_exists( 'amp_bk_public_data' ) ) wp_add_inline_script( 'amp-booking', 'window.AMP_BK=' . wp_json_encode( amp_bk_public_data() ) . ';', 'before' );

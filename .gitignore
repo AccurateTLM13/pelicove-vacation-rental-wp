@@ -1,0 +1,47 @@
+# Secrets / environment — never commit
+.env
+.env.*
+*.env
+wp-config.php
+wp-config-*.php
+CREDENTIALS*
+*CREDENTIALS*.txt
+*.pem
+*.key
+my.cnf
+.my.cnf
+auth.json
+*-state.json
+
+# Databases, dumps and migration archives
+*.sql
+*.sql.gz
+*.sqlite
+*.db
+db/
+*.wpress
+*.daf
+installer.php
+dup-installer/
+backups/
+ai1wm-backups/
+duplicator-backups/
+
+# WordPress runtime / uploads / cache
+wp-content/uploads/
+wp-content/cache/
+wp-content/upgrade/
+wp-content/advanced-cache.php
+
+# Node / tooling
+node_modules/
+npm-debug.log*
+
+# Large media and generated output
+screenshots/
+showcase/*.png
+audit/*/lh-*.json
+audit/*/psi-*.json
+audit/shots/
+*.log
+.DS_Store

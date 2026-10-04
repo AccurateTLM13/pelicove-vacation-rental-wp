@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Pelicove Vacation Homes mark (fictional brand)">
+  <defs><clipPath id="pcm"><rect width="64" height="64" rx="15"/></clipPath></defs>
+  <g clip-path="url(#pcm)">
+    <rect width="64" height="64" fill="#12304F"/>
+    <circle cx="41" cy="33" r="12" fill="#F5BF1F"/>
+    <rect y="35" width="64" height="29" fill="#1F5E8C"/>
+    <path d="M-2 41c5-2.6 9-2.6 14 0s9 2.6 14 0 9-2.6 14 0 9 2.6 14 0 9-2.6 14 0" fill="none" stroke="#9CC8E8" stroke-width="2" stroke-linecap="round" opacity=".8"/>
+    <path d="M-2 64V52c9-7 21-8 31-2.5 8 4.4 20 4 37-3V64z" fill="#EBD9B4"/>
+    <path d="M-2 52c9-7 21-8 31-2.5 8 4.4 20 4 37-3" fill="none" stroke="#FFF7DC" stroke-width="2" stroke-linecap="round"/>
+    <path d="M8 22c4.2-4.8 8.6-4.8 11.6 0 3-4.8 7.4-4.8 11.6 0" fill="none" stroke="#FFF7DC" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M22 12.5c2.6-3 5.2-3 7.2 0 2-3 4.6-3 7.2 0" fill="none" stroke="#FFF7DC" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" opacity=".75"/>
+  </g>
+</svg>
