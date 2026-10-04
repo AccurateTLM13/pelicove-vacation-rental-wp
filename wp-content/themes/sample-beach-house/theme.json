@@ -86,7 +86,7 @@
     {
      "slug": "heading",
      "name": "Instrument Serif",
-     "fontFamily": "\"Instrument Serif\", \"Instrument Serif Fallback\", \"Times New Roman\", serif",
+     "fontFamily": "\"Instrument Serif\", \"Instrument Serif Fallback\", \"Instrument Serif Fallback N\", \"Times New Roman\", serif",
      "fontFace": [
       {
        "fontFamily": "Instrument Serif",
@@ -111,7 +111,7 @@
     {
      "slug": "body",
      "name": "Instrument Sans",
-     "fontFamily": "\"Instrument Sans\", \"Instrument Sans Fallback\", \"Helvetica Neue\", Arial, sans-serif",
+     "fontFamily": "\"Instrument Sans\", \"Instrument Sans Fallback\", \"Instrument Sans Fallback R\", \"Helvetica Neue\", Arial, sans-serif",
      "fontFace": [
       {
        "fontFamily": "Instrument Sans",

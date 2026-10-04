@@ -57,12 +57,15 @@ require_once __DIR__ . '/inc/seo.php';
 
 // Season + JS flags before first paint (no flash of the wrong season)
 add_action( 'wp_head', function () {
-	echo "<script>(function(d){try{var s=localStorage.getItem('amp-season');}catch(e){}var m=new Date().getMonth()+1;d.setAttribute('data-season',s||([11,12,1,2].indexOf(m)>-1?'snowbird':'summer'));d.classList.add('js');})(document.documentElement);</script>\n";
-	// Preload the two text faces used above the fold (the hero poster preload lives in inc/perf.php).
-	$f = get_stylesheet_directory_uri() . '/assets/fonts/';
-	foreach ( array( 'instrument-sans.woff2', 'instrument-serif.woff2' ) as $font ) {
-		echo '<link rel="preload" href="' . esc_url( $f . $font ) . '" as="font" type="font/woff2" crossorigin>' . "\n";
-	}
+	echo "<script>(function(d){try{var s=localStorage.getItem('amp-season');}catch(e){}var m=new Date().getMonth()+1;d.setAttribute('data-season',s||([11,12,1,2].indexOf(m)>-1?'snowbird':'summer'));d.classList.add('js');})(document.documentElement);"
+		// v4.1.2: "page has painted" signal. Adds html.amp-p and fires window "amp:painted" once the first contentful paint has
+		// been presented and the browser is idle (3 s cap), so below-the-fold extras (live-weather calls, the Caveat face, the
+		// mobile story photos) never compete with the hero for bandwidth. Nothing visible waits on it.
+		. "(function(d,w){var f=0;function p(){if(f)return;f=1;d.classList.add('amp-p');try{w.dispatchEvent(new Event('amp:painted'));}catch(e){}}function q(){(w.requestIdleCallback||function(c){return setTimeout(c,1);})(p,{timeout:800});}try{var o=new PerformanceObserver(function(l){if(l.getEntriesByName('first-contentful-paint').length){o.disconnect();q();}});o.observe({type:'paint',buffered:true});}catch(e){w.addEventListener('load',q);}setTimeout(p,3000);})(document.documentElement,window);</script>\n";
+	// v4.1.2: no <link rel="preload" as="font"> any more. Chrome makes preloaded fonts render-blocking for up to 1.5 s after
+	// navigation start, and on real-world latency that hold kept the finished first frame (hero photo included) off screen
+	// until ~1.5 s. The fonts are still requested during the first layout (~30 ms later than a preload) and swap in over
+	// metric-matched fallbacks (assets/css/site.css), so the hero text keeps its line breaks.
 }, 0 );
 
 add_action( 'wp_enqueue_scripts', function () {

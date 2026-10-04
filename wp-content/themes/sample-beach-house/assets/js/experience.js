@@ -218,5 +218,7 @@
     function upd() { doc.style.setProperty('--amp-header-h', Math.round(h.getBoundingClientRect().height) + 'px'); }
     upd(); if (window.ResizeObserver) new ResizeObserver(upd).observe(h);
   }
-  ready(function () { initHeaderVar(); initSeason(); Hero.init(); initSunTimes(); initStory(); initParallax(); initLenis(); initReviews(); initPano(); initRooms(); });
+  // v4.1.2: the sunrise/sunset call feeds text ~2,500 px down; start it only after the first paint (html.amp-p, see the inline head script).
+  function afterPaint(fn) { var d = document.documentElement, done = false; function go() { if (!done) { done = true; fn(); } } if (d.classList.contains('amp-p')) return go(); window.addEventListener('amp:painted', go, { once: true }); setTimeout(go, 3500); }
+  ready(function () { initHeaderVar(); initSeason(); Hero.init(); afterPaint(initSunTimes); initStory(); initParallax(); initLenis(); initReviews(); initPano(); initRooms(); });
 })();

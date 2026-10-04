@@ -212,5 +212,7 @@
   }
 
   function ready(fn) { if (document.readyState !== 'loading') fn(); else document.addEventListener('DOMContentLoaded', fn); }
-  ready(function () { initHeader(); initReveal(); initWeather(); initLightbox(); initCountdown(); initMap(); });
+  // v4.1.2: the live-weather widget is ~4,000 px down; start its two API calls only after the first paint (html.amp-p, see the inline head script).
+  function afterPaint(fn) { var d = document.documentElement, done = false; function go() { if (!done) { done = true; fn(); } } if (d.classList.contains('amp-p')) return go(); window.addEventListener('amp:painted', go, { once: true }); setTimeout(go, 3500); }
+  ready(function () { initHeader(); initReveal(); afterPaint(initWeather); initLightbox(); initCountdown(); initMap(); });
 })();

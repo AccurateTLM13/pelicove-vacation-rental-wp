@@ -6,7 +6,7 @@
 	--amp-navy: #12304F; --amp-sea: #1F5E8C; --amp-foam: #E6F0F7; --amp-sand: #F1E7D6; --amp-sand-l: #FAF6EF;
 	--amp-sun: #F5BF1F; --amp-coral: #C24E2E; --amp-coral-d: #A63E22; --amp-ink: #1B2A31; --amp-muted: #56656C;
 	--amp-line: rgba(18,48,79,.14); --amp-radius: 20px; --amp-shadow: 0 24px 60px -28px rgba(18,48,79,.45), 0 4px 14px -6px rgba(18,48,79,.12);
-	--amp-serif: "Instrument Serif", "Instrument Serif Fallback", "Times New Roman", serif; --amp-sans: "Instrument Sans", "Instrument Sans Fallback", "Helvetica Neue", Arial, sans-serif; --amp-script: Caveat, "Segoe Print", cursive;
+	--amp-serif: "Instrument Serif", "Instrument Serif Fallback", "Instrument Serif Fallback N", "Times New Roman", serif; --amp-sans: "Instrument Sans", "Instrument Sans Fallback", "Instrument Sans Fallback R", "Helvetica Neue", Arial, sans-serif; --amp-script: Caveat, "Segoe Print", cursive;
 	--amp-hatch: repeating-linear-gradient(135deg, #e3dccf 0 2px, #f4efe6 2px 7px);
 	--amp-header-h: 76px;
 }
@@ -612,3 +612,9 @@ html.amp-novideo .amp-hero-play, html.amp-novideo .amp-hero-video { display: non
    browser skip its layout and keeps its lazy images out of the initial load even when slow-network lazy-load margins are wide. */
 @media (max-width: 900px) { .amp-story { content-visibility: auto; contain-intrinsic-size: auto 3200px; } }
 img.sbh-sized { height: auto; }
+/* v4.1.2: two below-the-fold extras wait for the first paint (html.amp-p is set by the inline head script once the first
+   contentful paint is on screen), so on slow phones they no longer share bandwidth with the hero, the hero fonts and the
+   booking scripts: the handwritten Caveat face (51 KB, first used ~1,350 px down) and, on phones, the five "A day at" story
+   photos (~270 KB, ~2,300 px down, inside a content-visibility block so hiding them changes no visible layout). */
+html.js:not(.amp-p) { --amp-script: "Segoe Print", cursive; --wp--preset--font-family--script: "Segoe Print", cursive; }
+@media (max-width: 900px) { html.js:not(.amp-p) .amp-step-mimg { display: none; } }

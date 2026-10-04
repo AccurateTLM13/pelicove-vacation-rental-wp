@@ -1,9 +1,14 @@
 /* ---------- All-Moh's-Paradise (fictional Pelicove demo): coastal styling ---------- */
-/* Metric-matched fallbacks (computed with fontTools against Liberation/Times/Arial) so the swap to the
-   web fonts barely moves text: avoids layout shift (CLS) while fonts load. */
-@font-face { font-family: "Instrument Serif Fallback"; src: local("Times New Roman"), local("TimesNewRomanPSMT"), local("Liberation Serif"), local("Tinos"); size-adjust: 84.5%; ascent-override: 117.1%; descent-override: 36.7%; line-gap-override: 0%; }
-@font-face { font-family: "Instrument Serif Fallback"; font-style: italic; src: local("Times New Roman Italic"), local("TimesNewRomanPS-ItalicMT"), local("Liberation Serif Italic"), local("Tinos Italic"); size-adjust: 88.6%; ascent-override: 111.7%; descent-override: 35%; line-gap-override: 0%; }
-@font-face { font-family: "Instrument Sans Fallback"; src: local("Arial"), local("ArialMT"), local("Liberation Sans"), local("Arimo"), local("Roboto"); size-adjust: 102.7%; ascent-override: 94.5%; descent-override: 24.3%; line-gap-override: 0%; }
+/* Metric-matched fallbacks so the swap to the web fonts barely moves text (no layout shift while fonts load).
+   v4.1.2: re-tuned so the hero title, pitch and eyebrow wrap onto the same number of lines as the web fonts at 320–430 px; the old values made the fallback ~3% too
+   wide, so on slow connections the 412 px hero title wrapped onto two lines and jumped when Instrument Serif arrived).
+   "… N" / "… R" are the Android system faces (Noto Serif / Roboto), which have different proportions from Times / Arial. */
+@font-face { font-family: "Instrument Serif Fallback"; src: local("Times New Roman"), local("TimesNewRomanPSMT"), local("Liberation Serif"), local("Tinos"); size-adjust: 82.4%; ascent-override: 120.1%; descent-override: 37.6%; line-gap-override: 0%; }
+@font-face { font-family: "Instrument Serif Fallback"; font-style: italic; src: local("Times New Roman Italic"), local("TimesNewRomanPS-ItalicMT"), local("Liberation Serif Italic"), local("Tinos Italic"); size-adjust: 88%; ascent-override: 112.5%; descent-override: 35.2%; line-gap-override: 0%; }
+@font-face { font-family: "Instrument Serif Fallback N"; src: local("Noto Serif"), local("Noto Serif Regular"), local("NotoSerif-Regular"), local("Droid Serif"), local("DroidSerif"); size-adjust: 79.2%; ascent-override: 125%; descent-override: 39.1%; line-gap-override: 0%; }
+@font-face { font-family: "Instrument Serif Fallback N"; font-style: italic; src: local("Noto Serif Italic"), local("NotoSerif-Italic"), local("Droid Serif Italic"), local("DroidSerif-Italic"); size-adjust: 77%; ascent-override: 128.6%; descent-override: 40.3%; line-gap-override: 0%; }
+@font-face { font-family: "Instrument Sans Fallback"; src: local("Arial"), local("ArialMT"), local("Liberation Sans"), local("Arimo"); size-adjust: 101.9%; ascent-override: 95.2%; descent-override: 24.5%; line-gap-override: 0%; }
+@font-face { font-family: "Instrument Sans Fallback R"; src: local("Roboto"), local("Roboto Regular"), local("Roboto-Regular"); size-adjust: 103.4%; ascent-override: 93.8%; descent-override: 24.2%; line-gap-override: 0%; }
 :root { --sbh-radius: 18px; --sbh-shadow: 0 18px 40px -22px rgba(15,59,76,.35); }
 html { scroll-behavior: smooth; }
 body { -webkit-font-smoothing: antialiased; }

@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Pelicove Performance (must-use)
  * Description: Site-wide speed tweaks for the All-Moh's-Paradise / Pelicove demo: removes unused WordPress front-end bloat, writes browser-caching + compression rules to .htaccess, serves pre-generated WebP copies of uploads to browsers that accept them, makes WebP copies of new uploads, and (once) activates the bundled Cache Enabler page cache.
- * Version: 1.0.0
+ * Version: 1.1.0
  * Author: Pelicove demo
  *
  * Must-use plugins load automatically (no activation). The .htaccess blocks are (re)written the next time an
@@ -141,6 +141,23 @@ add_action( 'admin_init', function () {
 	}
 	update_option( 'pelicove_perf_cache_done', 1, false ); // only once: if you deactivate it later it stays off
 }, 20 );
+
+/* v1.1 (theme 4.1.2): the host gzips HTML at a low level (home page: 68 KB on the wire, 42 KB at gzip -9). Let Cache Enabler
+ * store pre-compressed copies of each cached page (gzip -9, or Brotli where PHP has it) and send those instead.
+ * Runs once, on the first wp-admin visit after deploy; untick "Pre-compress cached pages" in Settings → Cache Enabler to undo. */
+add_action( 'admin_init', function () {
+	if ( ! current_user_can( 'manage_options' ) || get_option( 'pelicove_perf_compress_done' ) ) return;
+	if ( defined( 'PELICOVE_NO_AUTO_CACHE' ) && PELICOVE_NO_AUTO_CACHE ) return;
+	$s = get_option( 'cache_enabler' );
+	if ( ! is_array( $s ) || ! class_exists( 'Cache_Enabler' ) ) return;
+	if ( empty( $s['compress_cache'] ) ) {
+		$s['compress_cache'] = 1;
+		update_option( 'cache_enabler', $s );
+		if ( method_exists( 'Cache_Enabler', 'update_backend' ) ) Cache_Enabler::update_backend(); // validates + rewrites its settings file
+		do_action( 'cache_enabler_clear_complete_cache' ); // drop the uncompressed copies
+	}
+	update_option( 'pelicove_perf_compress_done', 1, false );
+}, 21 );
 
 /* Clear the page cache when availability or rates change (Availability admin page, or the settings option). */
 function pelicove_clear_page_cache() { do_action( 'cache_enabler_clear_complete_cache' ); }
